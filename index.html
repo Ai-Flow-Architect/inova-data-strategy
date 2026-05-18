@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>データ収集 戦略整理 ご提案｜株式会社イノーバ様</title>
+<style>
+  :root {
+    --primary: #1e40af;
+    --primary-light: #3b82f6;
+    --accent: #06b6d4;
+    --accent2: #10b981;
+    --warm: #f59e0b;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  .hero {
+    background: linear-gradient(135deg, #0f1e54 0%, #1e40af 55%, #06b6d4 100%);
+    color: #fff;
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 4px 16px; font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(22px, 4vw, 38px); font-weight: 800; margin-bottom: 14px; line-height: 1.4; }
+  .hero p { font-size: 15px; opacity: 0.95; max-width: 660px; margin: 0 auto; }
+  .hero-meta { margin-top: 22px; display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; font-size: 13px; opacity: 0.9; }
+  .hero-meta span { background: rgba(0,0,0,0.18); padding: 4px 12px; border-radius: 12px; }
+
+  .section { max-width: 940px; margin: 0 auto; padding: 56px 20px 16px; }
+  .section-title { font-size: 22px; font-weight: 800; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 14px; margin-bottom: 12px; }
+  .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 26px; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .summary-card { background: var(--card); border-radius: 14px; border: 1px solid var(--border); padding: 22px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .summary-card .icon { font-size: 26px; margin-bottom: 8px; }
+  .summary-card .label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .summary-card .value { font-size: 18px; font-weight: 800; color: var(--text); }
+
+  .arch-img { width: 100%; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 6px 22px rgba(15,30,84,0.18); display: block; }
+  .arch-cap { font-size: 12px; color: var(--muted); text-align: center; margin-top: 10px; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  th { background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; padding: 13px 14px; text-align: left; font-size: 13px; font-weight: 700; }
+  td { padding: 13px 14px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top; }
+  td.k { font-weight: 800; color: var(--primary); white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 10px; }
+  .tag.g { background: #d1fae5; color: #065f46; }
+  .tag.y { background: #fef3c7; color: #92400e; }
+  .tag.r { background: #fee2e2; color: #991b1b; }
+
+  .law-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media(max-width: 760px) { .law-grid { grid-template-columns: 1fr; } }
+  .law-card { background: var(--card); border-radius: 14px; padding: 22px 20px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .law-card::before { content: ""; display: block; width: 36px; height: 4px; border-radius: 4px; margin-bottom: 12px; }
+  .law-card.c1::before { background: var(--accent2); }
+  .law-card.c2::before { background: #ef4444; }
+  .law-card.c3::before { background: var(--warm); }
+  .law-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .law-card p { font-size: 13px; color: var(--muted); }
+
+  .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media(max-width: 880px) { .phase-grid { grid-template-columns: 1fr 1fr; } }
+  @media(max-width: 520px) { .phase-grid { grid-template-columns: 1fr; } }
+  .phase-card { background: var(--card); border-radius: 14px; padding: 22px 18px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); position: relative; }
+  .phase-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 14px 14px 0 0; }
+  .phase-card.p0::before { background: var(--accent); }
+  .phase-card.p1::before { background: var(--accent2); }
+  .phase-card.p2::before { background: var(--primary); }
+  .phase-card.p3::before { background: #8b5cf6; }
+  .phase-num { font-size: 12px; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; color: var(--accent); }
+  .phase-card.p1 .phase-num { color: var(--accent2); }
+  .phase-card.p2 .phase-num { color: var(--primary); }
+  .phase-card.p3 .phase-num { color: #8b5cf6; }
+  .phase-name { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+  .phase-period { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .phase-price { font-size: 18px; font-weight: 900; color: var(--text); }
+  .phase-price small { font-size: 12px; font-weight: 600; color: var(--muted); }
+
+  .note { background: linear-gradient(135deg, #eff6ff, #ecfeff); border: 1px solid #bfdbfe; border-radius: 14px; padding: 22px 24px; font-size: 14px; }
+  .note strong { color: var(--primary); }
+
+  .cta { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 16px; padding: 40px 28px; text-align: center; margin-top: 40px; }
+  .cta h2 { font-size: 21px; font-weight: 800; margin-bottom: 8px; }
+  .cta p { font-size: 14px; opacity: 0.95; margin-bottom: 18px; }
+  .cta-meet { display: inline-block; background: #fff; color: var(--primary); padding: 12px 24px; border-radius: 30px; font-weight: 800; text-decoration: none; }
+
+  footer { background: var(--text); color: #94a3b8; text-align: center; padding: 30px 20px; font-size: 13px; margin-top: 56px; }
+  footer strong { color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">AIフローアーキテクト ご提案資料</div>
+  <h1>データ収集 戦略整理 ご提案<br>公式API最優先・スクレイピングは最終手段</h1>
+  <p>求人情報・企業情報・Googleマップを「どう取得するか」を、<br>合法性・コスト・工数の3軸で意思決定できる状態に整理します。</p>
+  <div class="hero-meta">
+    <span>株式会社イノーバ様</span>
+    <span>データ活用 新規事業</span>
+    <span>壁打ち・方針整理フェーズ</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">本日の論点（壁打ちアジェンダ）</div>
+  <div class="section-sub">この資料は結論の押し付けではなく、貴社が判断するための材料の整理です。</div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="icon">🧭</div><div class="label">提供価値</div><div class="value">取得方針の整理</div></div>
+    <div class="summary-card"><div class="icon">⚖️</div><div class="label">最大の差別化</div><div class="value">法務3分類</div></div>
+    <div class="summary-card"><div class="icon">💰</div><div class="label">論点</div><div class="value">件数・鮮度・コスト</div></div>
+    <div class="summary-card"><div class="icon">🪜</div><div class="label">進め方</div><div class="value">段階投資</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">データソース別 取得方針マトリクス</div>
+  <div class="section-sub">「スクレイピングできるか」ではなく「合法に・いくらで・どの鮮度で取れるか」で設計します。</div>
+  <table>
+    <thead>
+      <tr><th>対象</th><th>第一手段（推奨）</th><th>難易度</th><th>論点・コスト感</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="k">企業情報</td>
+        <td>国税庁 法人番号API（約500万社・無料）／ gBizINFO（約400万件・無料・出典明記で商用可）</td>
+        <td><span class="tag g">低</span></td>
+        <td>公式オープンデータでほぼ全件を合法取得。スクレイピング原則不要</td>
+      </tr>
+      <tr>
+        <td class="k">求人情報</td>
+        <td>媒体公式API／フィード／提携。無ければ媒体ごとに可否を1次切り分け</td>
+        <td><span class="tag y">高</span></td>
+        <td>規約違反・DB著作権・不正競争防止法が論点。鮮度が命（掲載は2〜3週で消滅）</td>
+      </tr>
+      <tr>
+        <td class="k">Googleマップ</td>
+        <td>Google Places / Maps Platform API（規約準拠・有料）</td>
+        <td><span class="tag r">中</span></td>
+        <td>スクレイピングはToS明確に禁止。API前提で件数・頻度を絞る予算設計が必須</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title">全体アーキテクチャ（5層）</div>
+  <div class="section-sub">公式APIを軸に、例外時のみ限定的に補完。規約変更の監視まで含めて運用に耐える構成です。</div>
+  <img class="arch-img" src="assets/architecture.png" alt="データ収集アーキテクチャ 5層構成図">
+  <div class="arch-cap">収集層 → 正規化層 → 蓄積層 → 品質監視層 → 活用層／土台に法務3分類</div>
+</div>
+
+<div class="section">
+  <div class="section-title">法務3分類フレーム（最大の差別化）</div>
+  <div class="section-sub">リスクを「消す」のではなく、経営として「意思決定できる状態」に整理します。</div>
+  <div class="law-grid">
+    <div class="law-card c1">
+      <h3>① 明確クリア</h3>
+      <p>公式API・オープンデータ。出典明記等の条件を満たせば即実行。</p>
+    </div>
+    <div class="law-card c2">
+      <h3>② 明確NG</h3>
+      <p>規約で明示禁止（Googleマップ等）。スクレイピングせずAPI・代替に置換。</p>
+    </div>
+    <div class="law-card c3">
+      <h3>③ グレー</h3>
+      <p>規約が曖昧・DB著作権が論点。件数／頻度／用途を限定し、経営判断にエスカレーション（弁護士確認を推奨）。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">進め方ロードマップ（段階投資）</div>
+  <div class="section-sub">いきなり作り込まず、入口で方針を固めてから段階的に投資判断いただける構成です。</div>
+  <div class="phase-grid">
+    <div class="phase-card p0">
+      <div class="phase-num">PHASE 0</div>
+      <div class="phase-name">方針整理</div>
+      <div class="phase-period">今回の入口・週1〜2h</div>
+      <div class="phase-price">時給制 <small>¥3,500〜6,000</small></div>
+    </div>
+    <div class="phase-card p1">
+      <div class="phase-num">PHASE 1</div>
+      <div class="phase-name">PoC（1ソース実証）</div>
+      <div class="phase-period">2〜3週間</div>
+      <div class="phase-price">¥298,000<small>〜</small></div>
+    </div>
+    <div class="phase-card p2">
+      <div class="phase-num">PHASE 2</div>
+      <div class="phase-name">本実装（3ソース統合）</div>
+      <div class="phase-period">1〜2ヶ月・自動化＋監視</div>
+      <div class="phase-price">¥980,000<small>〜</small></div>
+    </div>
+    <div class="phase-card p3">
+      <div class="phase-num">PHASE 3</div>
+      <div class="phase-name">運用・保守</div>
+      <div class="phase-period">継続</div>
+      <div class="phase-price">月額<small>（応相談）</small></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="note">
+    <strong>本日のゴール：</strong>まずは Phase 0（方針整理）を、週1〜2時間・低リスクな入口として始めることをご提案します。Phase 1 以降は、整理した方針と費用対効果を見たうえで貴社にご判断いただけます。金額は現時点の目安であり、対象件数・鮮度の確定後に正式見積りをご提示します。
+  </div>
+
+  <div class="cta">
+    <h2>2026年5月21日（木）11:00 オンライン面談</h2>
+    <p>当日は、上記マトリクスをたたき台に「3ソースを分析の母集団として何件・どの鮮度で必要か」を一緒に整理します。</p>
+    <a href="https://meet.google.com/uup-ypgx-pok" class="cta-meet" target="_blank">Google Meet で参加する</a>
+  </div>
+</div>
+
+<footer>
+  <div><strong>AIフローアーキテクト</strong> ／ データ収集 戦略整理 ご提案</div>
+  <div style="margin-top:6px;font-size:12px;">クラウドワークス登録名：LPteam ／ ご質問はCWメッセージにて</div>
+</footer>
+
+</body>
+</html>
